@@ -1,0 +1,548 @@
+/* --- VARIAVEIS E RESET --- */
+:root {
+    --bg-color: #0c0101; 
+    --accent-color: #ffcc00; /* Dourado/Âmbar */
+    --text-color: #f0f0f0; 
+    --retro-red: #8b0000; 
+    --menu-bg: #1a0a0a; /* Fundo mais escuro para o menu */
+}
+
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Cinzel", sans-serif;
+}
+.iniciobtn{
+    text-decoration: none;
+    cursor: pointer;
+}
+body {
+    font-family: 'Playfair Display', serif;
+    background-color: rgb(247, 164, 164);
+    color: var(--text-color);
+    padding-top: 120px; /* Mantém o espaço para o cabeçalho fixo */
+}
+
+/* ------------------ MENU LATERAL ------------------ */
+.menu-lateral {
+    height: 100%;
+    width: 0; /* Começa fechado */
+    position: fixed;
+    z-index: 2000; /* Acima de tudo */
+    top: 0;
+    left: 0;
+    background-color: var(--menu-bg);
+    overflow-x: hidden;
+    transition: 0.5s; /* Animação suave */
+    padding-top: 60px;
+    box-shadow: 2px 0 10px rgba(236, 158, 158, 0.7);
+}
+
+.menu-lateral a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: var(--text-color);
+    display: block;
+    transition: 0.3s;
+}
+
+.menu-lateral a:hover {
+    color: var(--accent-color);
+}
+
+.menu-lateral .fechar-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.menu-lateral h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ------------------ CABEÇALHO FIXO ------------------ */
+.cabecalho-fixo {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background-color: #ff6363; 
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(233, 199, 199, 0.7);
+    border-bottom: 5px solid var(--accent-color); 
+}
+.conteudo-cabecalho {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 40px;
+    flex-wrap: wrap; 
+}
+.logotipo {
+    font-family: 'Cinzel', serif; font-size: 2.2em;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 4px rgba(255, 161, 161, 0.5);
+}
+
+/* Desktop Navigation */
+.nav-principal-desktop ul { 
+    list-style: none; 
+    display: flex; 
+}
+.nav-principal-desktop ul li a { 
+    color: var(--text-color); 
+    text-decoration: none; 
+    margin: 0 15px; 
+    transition: color 0.3s; 
+}
+.nav-principal-desktop ul li a:hover { 
+    color: var(--accent-color); 
+}
+/* ------------------ DROPDOWN DE CATEGORIAS (COM EFEITO SUAVE) ------------------ */
+/* Estilo para o item de menu que contém o dropdown */
+.dropdown-categoria {
+    position: relative;
+}
+
+/* Oculta e posiciona o menu suspenso por padrão para transição */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    min-width: 180px;
+    background-color: var(--menu-bg); 
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 4px 8px rgba(255, 237, 237, 0.5);
+    z-index: 1001; 
+    list-style: none;
+    padding: 10px 0;
+    margin-left: 15px; 
+
+    /* CHAVES PARA A TRANSIÇÃO SUAVE */
+    opacity: 0;
+    visibility: hidden; /* Oculta o menu para que não seja clicável */
+    transform: translateY(10px); /* Move 10px para baixo */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* Exibe o menu suspenso ao passar o mouse */
+.dropdown-categoria:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Retorna à posição original, criando o slide-down */
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.dropdown-menu li a {
+    padding: 8px 15px; 
+    margin: 0;
+    display: block;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(255, 204, 0, 0.2);
+    color: var(--accent-color);
+}
+
+/* ------------------ FIM DROPDOWN ------------------ */
+
+
+/* Placeholder para manter o logo centrado */
+.placeholder-nav {
+    width: 210px; /* Ajuste para ter a largura da navegação */
+    height: 0;
+}
+
+/* Botão do menu lateral (escondido no desktop) */
+.menu-hamburguer {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 2em;
+    cursor: pointer;
+    padding: 0 10px 0 0;
+}
+
+/* Barra de busca (Ajustada para ficar no meio no mobile) */
+.barra-busca {
+    flex-grow: 1; 
+    text-align: center;
+    padding: 10px 0;
+}
+.barra-busca input { 
+    padding: 8px; 
+    border: none; 
+    border-radius: 4px 0 0 4px;
+    width: 60%; 
+    max-width: 400px;
+}
+.barra-busca button { 
+    padding: 8px 15px; 
+    background-color: var(--accent-color); 
+    color: var(--bg-color); 
+    border: none; 
+    border-radius: 0 4px 4px 0; 
+    cursor: pointer; 
+}
+
+/*---------- Início banner ----------*/
+section{
+    padding: 2rem 5%;
+}
+
+section h3 span p{
+    font-family: "Creepster", system-ui;
+}
+
+
+.btn{
+    display: inline-block;
+    margin-top: 0.5rem;
+    border-radius: 5rem;
+    background: #f34949;
+    color: #fff;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.btn:hover{
+    background: var(--retro-red);
+}
+/*---------- end banner ----------*/
+
+/*---------- Início home ----------*/
+#home{
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    background: url("Images/a.jfif") no-repeat fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+#home .content{
+    max-width: 100rem;
+}
+
+#home .content h3{
+    font-size: 6rem;
+    color: #ff9494;
+    font-family: "Limelight", system-ui;
+}
+
+#home .content span{
+    font-size: 1.4rem;
+    color: rgb(253, 253, 154);
+    padding: 1rem 0;
+    line-height: 1.0;
+}
+
+#home .content p{
+    font-size: 18px;
+    color: #000000;
+    padding: 1rem 0;
+    line-height: 1.5;
+}
+/*---------- end home ----------*/
+
+/*Inicio do heading*/
+.heading{
+    text-align: center;
+    font-size: 4rem;
+    color: #ff060650;
+    padding: 1rem;
+    margin: 2rem 0;
+    background: rgb(252, 135, 135);
+    font-family: "Limelight", system-ui;
+}
+
+.heading span{
+    color: #fff;
+    font-family: "Limelight", system-ui;
+}
+
+.introduction .row{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 3rem 0;
+    padding-bottom: 3rem;
+}
+
+
+.introduction .row .image{
+    flex: 1 1 40rem;
+    position: absolute;
+}
+
+.img_j {
+    margin-top: 100px;
+    width: 600px;
+    border: 0.5rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    height: 420px;
+    object-fit: cover;
+}
+
+.introduction .row .image .img{
+    width: 10px;
+    border: 1.5rem solid #333;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    height: 10px;
+    object-fit: cover;
+}
+
+.introduction .row .h3{
+    display: flex;
+    top: 50%; transform: translateY(-50%);
+    font-size: 3rem;
+    background: #fff;
+    width: 100%;
+    padding: 1rem 2rem;
+    
+}
+
+.introduction .row .content{
+    flex: 1 1 40rem;
+    margin-left: 52%;
+}
+
+/*Fim do heading*/
+
+/* Estilização do Título Principal */
+.review .title {
+    /* Centraliza o título */
+    text-align: center; 
+    /* Adiciona margem abaixo do título para criar o espaçamento */
+    margin-bottom: 5rem; /* Aumentei o espaçamento aqui (ajuste 5rem se for demais) */
+    /* Define o tamanho da fonte */
+    font-size: 3rem; 
+    /* Adiciona uma cor base */
+    color: #fff; 
+    /* Adiciona um pequeno padding interno para respirar */
+    padding: 1rem 0;
+}
+
+/* Estilização da palavra "Cinéfilos" (dentro do <span>) */
+.review .title span {
+    /* Exemplo: Cor amarela/laranja para destaque */
+    color: #ffc107; 
+    /* Opcional: Efeito de texto com sombra para destacar em fundos escuros */
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5); 
+}
+#reviews .box-container{
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-start; /* Garante que as caixas se alinhem ao topo se tiverem alturas diferentes */
+    width: 100%; /* Garante que o container ocupe toda a largura disponível */
+    box-sizing: border-box; /* Importante para padding e border não adicionarem largura extra */
+}
+
+#reviews .box-container .box{
+    text-align: center;
+    padding: 1.5rem; 
+    flex: 1 1 300px; /* Crucial: Grow, Shrink, Basis */
+    max-width: 400px; /* Garante que não fiquem excessivamente grandes */
+    min-width: 280px; /* Impede que fiquem muito pequenas */
+    background: #1a1a1a; 
+    border: 1px solid #333; 
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+    box-sizing: border-box; /* Também importante aqui */
+}
+
+/* CONTROLE DE TAMANHO DOS ELEMENTOS INTERNOS */
+
+/* Para o ícone de citação e o ícone de usuário */
+
+#reviews .box-container .box > img {
+    width: 6rem; 
+    height: auto;
+    margin: 1rem 0;
+    object-fit: contain; /* Garante que a imagem não seja cortada se a proporção mudar */
+}
+
+/* Para as estrelas (que estão dentro de uma <div>) */
+#reviews .box-container .box div img {
+    width: 2rem; 
+    height: 2rem;
+    object-fit: contain;
+    margin: 0 0.1rem; 
+    vertical-align: middle; /* Ajuda a alinhar as estrelas */
+}
+
+#reviews .box-container .box p {
+    font-size: 1rem;
+    color: #fff; 
+    padding: 0.5rem 0.5rem; /* Ajustei o padding para o texto */
+    line-height: 1.5; /* Melhorar legibilidade */
+}
+
+#reviews .box-container .box h3 {
+    color: #fff; /* Cor para o nome */
+    margin-top: 0.5rem;
+}
+
+/* ------------------ FOOTER ------------------ */
+.movie-talk-footer {
+    background-color: #1f1f1f; 
+    color: #d0ff00; 
+    padding: 20px 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+.rights-reserved {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.social-button {
+    color: #333; 
+    background-color: #ffffff; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.social-button:hover {
+    background-color: #ff0000; /* Cor de destaque ao passar o mouse */
+    color: #fff; /* Ícone branco ao passar o mouse */
+    box-shadow: 0 0 25px yellow;
+}
+/* ------------------ RESPONSIVIDADE (SMARTPHONES) ------------------ */
+@media (max-width: 768px) {
+    #home{
+        background-image: none;
+    }
+    
+    body {
+        padding-top: 130px; 
+        background-color: #000000 ;
+    }
+    /*Para sumir o gif no mobile*/
+    .introduction .row .image .img{
+        display: none;
+    }
+
+    /*Garantir que o container não ocupe espaço desnecessário*/
+    .introduction .row .image{
+        display: none;
+    }
+
+    /*Para o conteúdo do texto da introdução ocupe 100% da largura*/
+    .introduction .row .content{
+        flex: 1 1 100%;
+        margin-left: 0;
+    }
+
+    /* 1. Header Fixo: Layout em duas linhas */
+    .conteudo-cabecalho {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    /* 2. Menu Hamburguer (Exibir) */
+    .menu-hamburguer {
+        display: block;
+        order: 1; 
+    }
+
+    /* 3. Logotipo (Ajustar posição no mobile) */
+    .logotipo {
+        order: 2; 
+        font-size: 1.8em;
+        text-align: center;
+        flex-grow: 1;
+    }
+    
+    /* 4. Barra de Busca (Centralizada na segunda linha) */
+    .barra-busca {
+        order: 4; 
+        padding: 5px 0;
+        width: 100%;
+    }
+    .barra-busca input {
+        width: 80%;
+    }
+
+    /* 5. Navegação Desktop (Esconder) */
+    .nav-principal-desktop {
+        display: none;
+    }
+    .placeholder-nav {
+        display: none;
+    }
+}
+
+    .heading{
+        font-size: 3rem;
+    }
+
+/* Estilo do Botão de Expansão */
+.botao-expansao {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.botao-expansao:hover {
+    background-color: #ffd966;
+}
+
+/* Classe que o JS adicionará para esconder o botão */
+.botao-expansao.oculto {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0 auto;
+    padding: 0;
+}
